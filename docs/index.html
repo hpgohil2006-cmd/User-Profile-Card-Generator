@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile Card Generator</title>
+    <meta name="description" content="Create beautiful user profile cards with a modern, responsive design." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero-bar">
+        <div>
+          <span class="eyebrow">Profile Studio</span>
+          <h1>Build a standout digital identity</h1>
+        </div>
+        <div class="hero-badge">
+          <span class="badge-label">Live records</span>
+          <strong id="recordCount">0</strong>
+        </div>
+      </header>
+
+      <main class="content-grid">
+        <section class="panel form-panel">
+          <div class="panel-header">
+            <span class="panel-kicker">Create</span>
+            <h2>New profile card</h2>
+          </div>
+
+          <form id="profileForm" class="profile-form">
+            <div class="field-group two-col">
+              <label>
+                <span>Name</span>
+                <input type="text" id="name" placeholder="Jane Doe" required />
+              </label>
+              <label>
+                <span>Role</span>
+                <input type="text" id="title" placeholder="UX Designer" required />
+              </label>
+            </div>
+
+            <label>
+              <span>Bio</span>
+              <textarea id="bio" rows="4" placeholder="Tell the world a little about yourself..." required></textarea>
+            </label>
+
+            <label>
+              <span>Skills</span>
+              <textarea id="skills" rows="3" placeholder="Design, JavaScript, Branding, Product Strategy" required></textarea>
+            </label>
+
+            <div class="field-group three-col">
+              <label>
+                <span>GitHub</span>
+                <input type="url" id="github" placeholder="https://github.com/username" />
+              </label>
+              <label>
+                <span>LinkedIn</span>
+                <input type="url" id="linkedin" placeholder="https://linkedin.com/in/username" />
+              </label>
+              <label>
+                <span>Twitter</span>
+                <input type="url" id="twitter" placeholder="https://x.com/username" />
+              </label>
+            </div>
+
+            <label>
+              <span>Accent color</span>
+              <select id="accent">
+                <option value="#8b5cf6">Violet</option>
+                <option value="#f59e0b">Amber</option>
+                <option value="#ef4444">Coral</option>
+                <option value="#10b981">Emerald</option>
+                <option value="#3b82f6">Blue</option>
+                <option value="#ec4899">Pink</option>
+              </select>
+            </label>
+
+            <button type="submit" class="primary-btn">Generate profile</button>
+          </form>
+        </section>
+
+        <section class="panel gallery-panel">
+          <div class="panel-header">
+            <span class="panel-kicker">Preview</span>
+            <h2>Saved profile cards</h2>
+          </div>
+
+          <div id="cardList" class="card-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
