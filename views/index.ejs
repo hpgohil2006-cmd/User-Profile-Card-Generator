@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile Card Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero-bar">
+        <div>
+          <span class="eyebrow">Profile Studio</span>
+          <h1>Build a standout digital identity</h1>
+        </div>
+        <div class="hero-badge">
+          <span class="badge-label">Live records</span>
+          <strong><%= cards.length %></strong>
+        </div>
+      </header>
+
+      <main class="content-grid">
+        <section class="panel form-panel">
+          <div class="panel-header">
+            <span class="panel-kicker">Create</span>
+            <h2>New profile card</h2>
+          </div>
+
+          <form action="/profiles" method="POST" class="profile-form">
+            <div class="field-group two-col">
+              <label>
+                <span>Name</span>
+                <input type="text" name="name" placeholder="Jane Doe" required />
+              </label>
+              <label>
+                <span>Role</span>
+                <input type="text" name="title" placeholder="UX Designer" required />
+              </label>
+            </div>
+
+            <label>
+              <span>Bio</span>
+              <textarea name="bio" rows="4" placeholder="Tell the world a little about yourself..." required></textarea>
+            </label>
+
+            <label>
+              <span>Skills</span>
+              <textarea name="skills" rows="3" placeholder="Design, JavaScript, Branding, Product Strategy" required></textarea>
+            </label>
+
+            <div class="field-group three-col">
+              <label>
+                <span>GitHub</span>
+                <input type="url" name="github" placeholder="https://github.com/username" />
+              </label>
+              <label>
+                <span>LinkedIn</span>
+                <input type="url" name="linkedin" placeholder="https://linkedin.com/in/username" />
+              </label>
+              <label>
+                <span>Twitter</span>
+                <input type="url" name="twitter" placeholder="https://x.com/username" />
+              </label>
+            </div>
+
+            <label>
+              <span>Accent color</span>
+              <select name="accent">
+                <option value="#8b5cf6">Violet</option>
+                <option value="#f59e0b">Amber</option>
+                <option value="#ef4444">Coral</option>
+                <option value="#10b981">Emerald</option>
+                <option value="#3b82f6">Blue</option>
+                <option value="#ec4899">Pink</option>
+              </select>
+            </label>
+
+            <button type="submit" class="primary-btn">Generate profile</button>
+          </form>
+        </section>
+
+        <section class="panel gallery-panel">
+          <div class="panel-header">
+            <span class="panel-kicker">Preview</span>
+            <h2>Saved profile cards</h2>
+          </div>
+
+          <% if (cards.length === 0) { %>
+            <div class="empty-state">
+              <div class="empty-icon">✨</div>
+              <p>No profile cards yet. Create one to see the preview.</p>
+            </div>
+          <% } else { %>
+            <div class="card-grid">
+              <% cards.forEach((card) => { %>
+                <article class="profile-card" style="--accent: <%= card.accent || '#8b5cf6' %>;">
+                  <div class="card-header">
+                    <div class="avatar"><%= card.avatar %></div>
+                    <div class="card-meta">
+                      <h3><%= card.name %></h3>
+                      <p><%= card.title %></p>
+                    </div>
+                  </div>
+
+                  <p class="bio"><%= card.bio %></p>
+
+                  <ul class="skill-list">
+                    <% card.skillsList.forEach((skill) => { %>
+                      <li><%= skill %></li>
+                    <% }) %>
+                  </ul>
+
+                  <div class="social-row">
+                    <% if (card.github) { %>
+                      <a href="<%= card.github %>" target="_blank" rel="noreferrer">GitHub</a>
+                    <% } %>
+                    <% if (card.linkedin) { %>
+                      <a href="<%= card.linkedin %>" target="_blank" rel="noreferrer">LinkedIn</a>
+                    <% } %>
+                    <% if (card.twitter) { %>
+                      <a href="<%= card.twitter %>" target="_blank" rel="noreferrer">X</a>
+                    <% } %>
+                  </div>
+
+                  <form action="/profiles/<%= card.id %>/delete" method="POST" class="delete-form">
+                    <button type="submit">Delete</button>
+                  </form>
+                </article>
+              <% }) %>
+            </div>
+          <% } %>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
